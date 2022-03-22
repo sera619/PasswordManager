@@ -62,10 +62,7 @@ class PasswordManager:
     
 def main():
     password = {
-        "email": "2323423452",
-        "facebook": "password1",
-        "youtube": "password2",
-        "github": "password3"
+        "PLACEHOLDER-PASS-1": "743z4782",
     }
     
     pm = PasswordManager()
