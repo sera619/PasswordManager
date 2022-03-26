@@ -33,10 +33,6 @@ class PasswordManager:
 	def createKey(self,path):
 		self.key = Fernet.generate_key()
 		path ='data/keys/'+path+'.key'		
-		if not os.path.exists(path):
-			self.errMsg()
-			sleep(2)
-			return main()
 		with open(path, 'wb') as f:
 			f.write(self.key)
 			f.close()
