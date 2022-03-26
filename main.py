@@ -33,7 +33,6 @@ class PasswordManager:
 	def createKey(self,path):
 		self.key = Fernet.generate_key()
 		path ='data/keys/'+path+'.key'		
-		print(self.key)
 		if not os.path.exists(path):
 			self.errMsg()
 			sleep(2)
@@ -104,6 +103,13 @@ class PasswordManager:
 		if self.pathSelected:
 			print(BColors.ORANGE+"\nSelected Passfile: "+BColors.CLEAR+BColors.OKGREEN+BColors.UNDERLINE+f"{self.pathFile}\n"+BColors.CLEAR)
 	
+	def resetSelection(self):
+		self.keySelected = False
+		self.pathKey = None
+		self.pathSelected = False
+		self.pathFile = None
+
+	
 def main():
 	password = {
 		"PLACEHOLDER-PASS-1": "743z4782",
@@ -119,37 +125,40 @@ def main():
 | |         | |   _____) ) _____) )  | |___| |  | | / /____  / /____   | |        | || |__/ / 
 |_|         |_|  (______/ (______/    \______|  |_|(_______)(_______)  |_|        |_||_____/  
 			
-   			-Version 0.1.4 | Copyright © 2022 S3R43o3-
+   			-Version 0.1.8 | Copyright © 2022 S3R43o3-
 """)+BColors.CLEAR)
 	menu = print(BColors.ORANGE+BColors.BOLD+(f"""\n
-		{BColors.OKCYAN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathKey}
-		{BColors.OKCYAN+"Selected Pass-File: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathFile}
-									   
-	{BColors.OKCYAN+BColors.BOLD+"What do you want to do?"+BColors.CLEAR+BColors.ORANGE+BColors.BOLD}
- 
-		(1) Create a new password key
-		(2) Load an existing password key
+				{BColors.OKGREEN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathKey}
+				{BColors.OKGREEN+"Selected Pass-File: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathFile}
 
-		(3) Create new password file
-		(4) Load existing password file
-  
-		(5) Add a new password
-		(6) Get a password
-		
-  
-		(q) Quit              
+									   
+  {BColors.OKCYAN+BColors.BOLD+"Welcome!What do you want to do?"+BColors.CLEAR+BColors.ORANGE+BColors.BOLD}
+ 
+			(1) Create a new password key
+			(2) Load an existing password key
+
+			(3) Create new password file
+			(4) Load existing password file
+	
+			(5) Add a new password
+			(6) Get a password
+			
+			(r) Reset selection
+			
+	
+			(q) Quit              
 	"""+BColors.CLEAR))
 	menu
 	done = False
 	while not done:
 		try:
 			pm.infoPrint()
-
 			choice = input(BColors.BOLD+BColors.OKBLUE+"Enter a Option: "+BColors.CLEAR)
 			if choice == "1":
 				pm.infoPrint()
-		
 				path = input(BColors.BOLD+BColors.OKBLUE+"Enter keyname: "+BColors.CLEAR)
+				if path.lower() == 'q':
+					return main()
 				pm.createKey(path)
 			elif choice == "2":            
 				pm.infoPrint()
@@ -174,8 +183,7 @@ def main():
 					print(BColors.BOLD+BColors.RED+'\n>>>>>>>>>> You need to select a passwordkey first! <<<<<<<<<<\n'+BColors.CLEAR)
 					sleep(2.0)
 					return main()
-				pm.infoPrint()
-		
+				pm.infoPrint()		
 				path = input(BColors.BOLD+BColors.OKBLUE+"Enter a name for new passwordfile: "+BColors.CLEAR)
 				if path.lower() == 'q':
 					return main()
@@ -204,7 +212,6 @@ def main():
 					sleep(2.0)
 					return main()
 				pm.infoPrint()
-
 				site = input(BColors.BOLD+BColors.OKBLUE+"Enter site: "+BColors.CLEAR)
 				password = input(BColors.BOLD+BColors.OKBLUE+"Enter password: "+BColors.CLEAR)
 				if password.lower() == 'q' | site.lower() == 'q':
@@ -221,9 +228,12 @@ def main():
 				if site.lower() == 'q':
 					return main()
 				print(BColors.ORANGE+BColors.BOLD+f"Password for {BColors.OKGREEN+site+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} is {BColors.OKGREEN+pm.getPassword(site)+BColors.CLEAR}")
-			elif choice == "q":
+			elif choice.lower() == "q":
 				done = True
 				print(BColors.RED+BColors.BOLD+"\n <<<<< Bye! >>>>>\n\n"+BColors.CLEAR)            
+			elif choice.lower() == 'r':
+				pm.resetSelection()
+				print(BColors.ORANGE+BColors.BOLD+"\nYou can now choose a other key and file!\n")
 			else:
 				pm.errMsg()
 				sleep(2.0)
