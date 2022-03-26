@@ -27,6 +27,9 @@ Python version 3.7+ required!
 >```
 >
 > - Follow the given instructions on the Terminal!
+> - You can Watch this youtube-video for example (click on image):
+>
+>    [![Video Title](https://img.youtube.com/vi/iTgesNe3-3s/3.jpg)](https://www.youtube.com/watch?v=iTgesNe3-3s)
 >
 > ### Need Help ? ###
 >
