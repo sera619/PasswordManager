@@ -136,7 +136,7 @@ class PasswordManager:
 """)+BColors.CLEAR)
 	
 	def menu(self):
-		print(BColors.ORANGE+BColors.BOLD+(f"""\n
+		print(BColors.ORANGE+BColors.BOLD+(f"""
 {BColors.OKCYAN+BColors.BOLD+"Welcome! What do you want to do?"+BColors.CLEAR+BColors.ORANGE+BColors.BOLD}
 {BColors.OKCYAN+BColors.BOLD+"‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"}
 	{BColors.OKCYAN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {self.pathKey}
@@ -298,6 +298,7 @@ def main():
 			elif choice.lower() == 'r':
 				pm.resetSelection()
 				print(BColors.OKGREEN+BColors.BOLD+"\nYou can now choose a other key and file!\n"+BColors.CLEAR)
+				sleep(2)
 				pm.menu()
 			else:
 				pm.errMsg()
