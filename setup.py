@@ -4,7 +4,6 @@ from cx_Freeze import setup, Executable
 
 files =['main.py']
 option = {
-    'include_files': files,
 }
 target = Executable(script='main.py')
 
