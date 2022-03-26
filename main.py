@@ -85,10 +85,6 @@ class PasswordManager:
 				f.close()
 
 	def getPassword(self, site):
-		if site is not self.password_dic:
-			self.errMsg()
-			sleep(2)
-			return main()
 		return self.password_dic[site]
 	
 	def errMsg(self):
@@ -289,9 +285,12 @@ def main():
 					return main()
 				site = input(BColors.BOLD+BColors.OKBLUE+"What site password you want?: "+BColors.CLEAR)
 				if site.lower() == 'q':
-					return main()
-				print(BColors.ORANGE+BColors.BOLD+f"Password for {BColors.OKGREEN+site+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} is {BColors.OKGREEN+pm.getPassword(site)+BColors.CLEAR}")
+					return main()	
 				pm.menu()
+				print(BColors.RED+BColors.BOLD+"\n________________________________________________________\n\n")
+				print(BColors.ORANGE+BColors.BOLD+f"Password for {BColors.OKGREEN+site+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} is {BColors.OKGREEN+pm.getPassword(site)+BColors.CLEAR}")
+				print(BColors.RED+BColors.BOLD+"\n________________________________________________________\n")
+				
 			elif choice.lower() == "q":
 				done = True
 				print(BColors.RED+BColors.BOLD+"\n <<<<< Bye! >>>>>\n\n"+BColors.CLEAR)
