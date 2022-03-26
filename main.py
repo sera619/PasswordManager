@@ -132,7 +132,7 @@ class PasswordManager:
 | |         | |   _____) ) _____) )  | |___| |  | | / /____  / /____   | |        | || |__/ / 
 |_|         |_|  (______/ (______/    \______|  |_|(_______)(_______)  |_|        |_||_____/  
 			
-   			-Version 0.2.1 | Copyright © 2022 S3R43o3-
+   			-Version 0.2.4 | Copyright © 2022 S3R43o3-
 """)+BColors.CLEAR)
 	
 	def menu(self):
