@@ -7,6 +7,8 @@
 >  
 > Software just tested and runned on a Windows 11 system!
 >
+> ![55](src/preview.png)
+
 ## Installation ##
 
 Python version 3.7+ required!
