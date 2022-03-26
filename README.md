@@ -11,7 +11,7 @@
 
 Python version 3.7+ required!
 
->
+> - download the source code from [here](https://github.com/sera619/PasswordManager/archive/refs/heads/master.zip)
 > - Open a Terminal in the rootdirectory and type in:
 >
 >```bash
