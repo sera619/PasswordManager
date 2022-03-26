@@ -23,6 +23,7 @@ class PasswordManager:
 		self.password_file = None
 		self.password_dic = {}
 
+		self.fistRun = True
 		self.keySelected = False
 		self.pathKey = None
 		self.pathSelected = False
@@ -36,7 +37,7 @@ class PasswordManager:
 		with open(path, 'wb') as f:
 			f.write(self.key)
 			f.close()
-		print(BColors.OKGREEN+'\nSuccess! New Passwordkey created\n'+BColors.CLEAR)
+		print(BColors.OKGREEN+'Success! New Passwordkey created\n'+BColors.CLEAR)
 			
 	def loadKey(self,path):
 		self.pathKey = path
@@ -57,7 +58,7 @@ class PasswordManager:
 		if initial_values is not None:
 			for key, values in initial_values.items():
 				self.addPassword(key,values)
-		print(BColors.OKGREEN+'\nSuccess! New Passwordfile created\n'+BColors.CLEAR)
+		print(BColors.OKGREEN+'Success! New Passwordfile created\n'+BColors.CLEAR)
 			
 	def loadPassFile(self, path):
 		self.pathFile = path
@@ -80,7 +81,7 @@ class PasswordManager:
 			with open(self.password_file, 'a+') as f:
 				encrypted = Fernet(self.key).encrypt(password.encode())
 				f.write(site + ":" + str(encrypted.decode())+ "\n")
-				print(BColors.OKGREEN+"\nSuccess! New password saved!\n")
+				print(BColors.OKGREEN+"Success! New password saved!\n")
 				f.close()
 
 	def getPassword(self, site):
@@ -104,16 +105,26 @@ class PasswordManager:
 		self.pathKey = None
 		self.pathSelected = False
 		self.pathFile = None
-
 	
-def main():
-	password = {
-		"PLACEHOLDER-PASS-1": "743z4782",
-	}
-	
-	pm = PasswordManager()
-	clearConsole()
-	print(BColors.BOLD+BColors.OKCYAN+(r"""
+	def initPassmanager(self, fileDir, keyDir):
+		print('>>> P455 W1ZZ4RD started.\n>>> System: initialize relevant data ...')
+		sleep(1.5)
+		if not os.path.exists('data'):
+			print(BColors.VIOLETT+'>>> System: No Savedirectorys found! Create dat directory...'+BColors.CLEAR)
+			os.mkdir('data/')
+		if not os.path.exists('data/'+fileDir):
+			print(BColors.VIOLETT+'>>> System: No '+fileDir+' dir. Create one...'+BColors.CLEAR)
+			os.mkdir('data/'+fileDir)
+		if not os.path.exists('data/'+keyDir):
+			print(BColors.VIOLETT+'>>> System: No '+keyDir+' dir. Create one...'+BColors.CLEAR)
+			os.mkdir('data/'+keyDir)
+		print('>>> System: Data directory:'+BColors.OKGREEN+' okay!'+BColors.CLEAR)
+		print('>>> System: '+keyDir+' directory:'+BColors.OKGREEN+' okay!'+BColors.CLEAR)
+		print('>>> System: '+fileDir+' directory:'+BColors.OKGREEN+' okay!'+BColors.CLEAR)
+		print(BColors.OKGREEN+'>>> Systen: all checks okay, start software...'+BColors.CLEAR)
+		sleep(3)
+	def banner(self):
+		return print(BColors.BOLD+BColors.OKCYAN+(r"""
  ______    __     _______  _______    _  _  _   __  _______  _______  __     ______   _____   
 (_____ \  / /    (_______)(_______)  | || || | /  |(_______)(_______)/ /    (_____ \ (____ \  
  _____) )/ /____  ______   ______    | || || |/_/ |   __       __   / /____  _____) ) _   \ \ 
@@ -123,11 +134,13 @@ def main():
 			
    			-Version 0.2.1 | Copyright © 2022 S3R43o3-
 """)+BColors.CLEAR)
-	menu = print(BColors.ORANGE+BColors.BOLD+(f"""\n
+	
+	def menu(self):
+		return print(BColors.ORANGE+BColors.BOLD+(f"""\n
 {BColors.OKCYAN+BColors.BOLD+"Welcome! What do you want to do?"+BColors.CLEAR+BColors.ORANGE+BColors.BOLD}
 {BColors.OKCYAN+BColors.BOLD+"‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"}
-	{BColors.OKCYAN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathKey}
-	{BColors.OKCYAN+"Selected Pass-File: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathFile}
+	{BColors.OKCYAN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {self.pathKey}
+	{BColors.OKCYAN+"Selected Pass-File: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {self.pathFile}
  
 		(1) Create a new password key
 		(2) Load an existing password key
@@ -143,20 +156,63 @@ def main():
 
 		(q) Quit              
 	"""+BColors.CLEAR))
-	menu
+	 
+
+	
+def main():
+	password = {
+		"PLACEHOLDER-PASS-1": "743z4782",
+	}
+	
+	pm = PasswordManager()
+	clearConsole()
+# 	print(BColors.BOLD+BColors.OKCYAN+(r"""
+#  ______    __     _______  _______    _  _  _   __  _______  _______  __     ______   _____   
+# (_____ \  / /    (_______)(_______)  | || || | /  |(_______)(_______)/ /    (_____ \ (____ \  
+#  _____) )/ /____  ______   ______    | || || |/_/ |   __       __   / /____  _____) ) _   \ \ 
+# |  ____/|___   _)(_____ \ (_____ \   | ||_|| |  | |  / /      / /  |___   _)(_____ ( | |   | |
+# | |         | |   _____) ) _____) )  | |___| |  | | / /____  / /____   | |        | || |__/ / 
+# |_|         |_|  (______/ (______/    \______|  |_|(_______)(_______)  |_|        |_||_____/  
+			
+#    			-Version 0.2.1 | Copyright © 2022 S3R43o3-
+# """)+BColors.CLEAR)
+# 	menu = print(BColors.ORANGE+BColors.BOLD+(f"""\n
+# {BColors.OKCYAN+BColors.BOLD+"Welcome! What do you want to do?"+BColors.CLEAR+BColors.ORANGE+BColors.BOLD}
+# {BColors.OKCYAN+BColors.BOLD+"‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"}
+# 	{BColors.OKCYAN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathKey}
+# 	{BColors.OKCYAN+"Selected Pass-File: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathFile}
+ 
+# 		(1) Create a new password key
+# 		(2) Load an existing password key
+
+# 		(3) Create new password file
+# 		(4) Load existing password file
+
+# 		(5) Add a new password
+# 		(6) Get a password
+		
+# 		(r) Reset selection
+		
+
+# 		(q) Quit              
+# 	"""+BColors.CLEAR))
+	if(pm.fistRun):
+		pm.banner()
+	pm.initPassmanager('file','keys')
+	pm.menu()
 	done = False
 	while not done:
 		try:
-			pm.infoPrint()
+			#pm.infoPrint()
 			choice = input(BColors.BOLD+BColors.OKBLUE+"Enter a Option: "+BColors.CLEAR)
 			if choice == "1":
-				pm.infoPrint()
+				#pm.infoPrint()
 				path = input(BColors.BOLD+BColors.OKBLUE+"Enter keyname: "+BColors.CLEAR)
 				if path.lower() == 'q':
 					return main()
 				pm.createKey(path)
 			elif choice == "2":            
-				pm.infoPrint()
+				#pm.infoPrint()
 				savedKeys = os.listdir('data/keys')
 				if savedKeys == "":
 					print(BColors.BOLD+BColors.RED+"\nNo key exist! Please create a key first!\n"+BColors.CLEAR)
@@ -173,22 +229,24 @@ def main():
 				if path.lower() == 'q':
 					return main()
 				pm.loadKey(path)
+				pm.menu()
 			elif choice == "3":
 				if not pm.keySelected:
 					print(BColors.BOLD+BColors.RED+'\n>>>>>>>>>> You need to select a passwordkey first! <<<<<<<<<<\n'+BColors.CLEAR)
 					sleep(2.0)
 					return main()
-				pm.infoPrint()		
+				#pm.infoPrint()		
 				path = input(BColors.BOLD+BColors.OKBLUE+"Enter a name for new passwordfile: "+BColors.CLEAR)
 				if path.lower() == 'q':
 					return main()
 				pm.createPassFile(path, password)
+				pm.menu()
 			elif choice == "4":
 				if not pm.keySelected:
 					print(BColors.BOLD+BColors.RED+'\n>>>>>>>>>> You need to select a passwordkey first! <<<<<<<<<<\n'+BColors.CLEAR)
 					sleep(2.0)
 					return main()
-				pm.infoPrint()
+				#pm.infoPrint()
 				savedFiles = os.listdir('data/files')
 				count = 0
 				print(BColors.BOLD+BColors.ORANGE+'\nYour saved passfiles: \n'+BColors.CLEAR)
@@ -201,12 +259,13 @@ def main():
 				if path.lower() == 'q':
 					return main()
 				pm.loadPassFile(path)
+				pm.menu()
 			elif choice == "5":
 				if not pm.keySelected:
 					print(BColors.BOLD+BColors.RED+'\n>>>>>>>>>> You need to select a passwordkey first! <<<<<<<<<<\n'+BColors.CLEAR)
 					sleep(2.0)
 					return main()
-				pm.infoPrint()
+				#pm.infoPrint()
 				site = input(BColors.BOLD+BColors.OKBLUE+"Enter site: "+BColors.CLEAR)
 				password = input(BColors.BOLD+BColors.OKBLUE+"Enter password: "+BColors.CLEAR)
 				if password.lower() == 'q' | site.lower() == 'q':
@@ -214,6 +273,7 @@ def main():
 					sleep(1.5)
 					return main()
 				pm.addPassword(site,password)
+				pm.menu()
 			elif choice == "6":
 				if not pm.keySelected:
 					print(BColors.BOLD+BColors.RED+'\n>>>>>>>>>> You need to select a passwordkey first! <<<<<<<<<<\n'+BColors.CLEAR)
@@ -222,6 +282,7 @@ def main():
 				site = input(BColors.BOLD+BColors.OKBLUE+"What site password you want?: "+BColors.CLEAR)
 				if site.lower() == 'q':
 					return main()
+				pm.menu()
 				print(BColors.ORANGE+BColors.BOLD+f"Password for {BColors.OKGREEN+site+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} is {BColors.OKGREEN+pm.getPassword(site)+BColors.CLEAR}")
 			elif choice.lower() == "q":
 				done = True
@@ -239,6 +300,7 @@ def main():
 
 if __name__=='__main__':
 	clearConsole()
+	
 	main()        
 
 
