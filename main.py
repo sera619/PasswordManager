@@ -198,6 +198,7 @@ def main():
 # 	"""+BColors.CLEAR))
 	if(pm.fistRun):
 		pm.banner()
+		pm.fistRun = False
 	pm.initPassmanager('file','keys')
 	pm.menu()
 	done = False
