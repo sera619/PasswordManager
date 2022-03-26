@@ -124,7 +124,7 @@ class PasswordManager:
 		print(BColors.OKGREEN+'>>> Systen: all checks okay, start software...'+BColors.CLEAR)
 		sleep(3)
 	def banner(self):
-		return print(BColors.BOLD+BColors.OKCYAN+(r"""
+		print(BColors.BOLD+BColors.OKCYAN+(r"""
  ______    __     _______  _______    _  _  _   __  _______  _______  __     ______   _____   
 (_____ \  / /    (_______)(_______)  | || || | /  |(_______)(_______)/ /    (_____ \ (____ \  
  _____) )/ /____  ______   ______    | || || |/_/ |   __       __   / /____  _____) ) _   \ \ 
@@ -136,7 +136,7 @@ class PasswordManager:
 """)+BColors.CLEAR)
 	
 	def menu(self):
-		return print(BColors.ORANGE+BColors.BOLD+(f"""\n
+		print(BColors.ORANGE+BColors.BOLD+(f"""\n
 {BColors.OKCYAN+BColors.BOLD+"Welcome! What do you want to do?"+BColors.CLEAR+BColors.ORANGE+BColors.BOLD}
 {BColors.OKCYAN+BColors.BOLD+"‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"}
 	{BColors.OKCYAN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {self.pathKey}
@@ -199,7 +199,8 @@ def main():
 	if(pm.fistRun):
 		pm.banner()
 		pm.fistRun = False
-	pm.initPassmanager('file','keys')
+	if not os.path.exists('data'):
+		pm.initPassmanager('files','keys')
 	pm.menu()
 	done = False
 	while not done:
@@ -212,6 +213,7 @@ def main():
 				if path.lower() == 'q':
 					return main()
 				pm.createKey(path)
+				pm.menu()
 			elif choice == "2":            
 				#pm.infoPrint()
 				savedKeys = os.listdir('data/keys')
@@ -268,8 +270,13 @@ def main():
 					return main()
 				#pm.infoPrint()
 				site = input(BColors.BOLD+BColors.OKBLUE+"Enter site: "+BColors.CLEAR)
+				if site.lower() == 'q':
+					print('\nBack to mainmenu')
+					sleep(1.5)
+					return main()
+				
 				password = input(BColors.BOLD+BColors.OKBLUE+"Enter password: "+BColors.CLEAR)
-				if password.lower() == 'q' | site.lower() == 'q':
+				if password.lower() == 'q':
 					print('\nBack to mainmenu')
 					sleep(1.5)
 					return main()
@@ -283,14 +290,15 @@ def main():
 				site = input(BColors.BOLD+BColors.OKBLUE+"What site password you want?: "+BColors.CLEAR)
 				if site.lower() == 'q':
 					return main()
-				pm.menu()
 				print(BColors.ORANGE+BColors.BOLD+f"Password for {BColors.OKGREEN+site+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} is {BColors.OKGREEN+pm.getPassword(site)+BColors.CLEAR}")
+				pm.menu()
 			elif choice.lower() == "q":
 				done = True
-				print(BColors.RED+BColors.BOLD+"\n <<<<< Bye! >>>>>\n\n"+BColors.CLEAR)            
+				print(BColors.RED+BColors.BOLD+"\n <<<<< Bye! >>>>>\n\n"+BColors.CLEAR)
 			elif choice.lower() == 'r':
 				pm.resetSelection()
-				print(BColors.ORANGE+BColors.BOLD+"\nYou can now choose a other key and file!\n")
+				print(BColors.OKGREEN+BColors.BOLD+"\nYou can now choose a other key and file!\n"+BColors.CLEAR)
+				pm.menu()
 			else:
 				pm.errMsg()
 				sleep(2.0)
