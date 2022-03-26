@@ -125,28 +125,27 @@ def main():
 | |         | |   _____) ) _____) )  | |___| |  | | / /____  / /____   | |        | || |__/ / 
 |_|         |_|  (______/ (______/    \______|  |_|(_______)(_______)  |_|        |_||_____/  
 			
-   			-Version 0.1.8 | Copyright © 2022 S3R43o3-
+   			-Version 0.2.1 | Copyright © 2022 S3R43o3-
 """)+BColors.CLEAR)
 	menu = print(BColors.ORANGE+BColors.BOLD+(f"""\n
-				{BColors.OKGREEN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathKey}
-				{BColors.OKGREEN+"Selected Pass-File: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathFile}
-
-									   
-  {BColors.OKCYAN+BColors.BOLD+"Welcome!What do you want to do?"+BColors.CLEAR+BColors.ORANGE+BColors.BOLD}
+{BColors.OKCYAN+BColors.BOLD+"Welcome! What do you want to do?"+BColors.CLEAR+BColors.ORANGE+BColors.BOLD}
+{BColors.OKCYAN+BColors.BOLD+"‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"}
+	{BColors.OKCYAN+"Selected Key: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathKey}
+	{BColors.OKCYAN+"Selected Pass-File: "+BColors.CLEAR+BColors.ORANGE+BColors.BOLD} {pm.pathFile}
  
-			(1) Create a new password key
-			(2) Load an existing password key
+		(1) Create a new password key
+		(2) Load an existing password key
 
-			(3) Create new password file
-			(4) Load existing password file
-	
-			(5) Add a new password
-			(6) Get a password
-			
-			(r) Reset selection
-			
-	
-			(q) Quit              
+		(3) Create new password file
+		(4) Load existing password file
+
+		(5) Add a new password
+		(6) Get a password
+		
+		(r) Reset selection
+		
+
+		(q) Quit              
 	"""+BColors.CLEAR))
 	menu
 	done = False
