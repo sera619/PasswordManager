@@ -14,8 +14,6 @@
 
 ## Installation ##
 
-Python version 3.7+ required!
-
 > - download the source code from [here](https://github.com/sera619/PasswordManager/releases/download/v.0.3.6/P455W1ZZ4RD_v0.3.6_Win64.zip)
 > - extract the ZIP and run the included .exe
 >
