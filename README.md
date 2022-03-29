@@ -1,6 +1,7 @@
 # P455 W1ZZ4RD #
 >
 > P455 W1ZZ4RD is a commandline passwordmanager.
+> Windows 10/11 Release available!
 >
 > The software will create and save passwordhashes in a secure way.
 > To get started read the [install](#Installation) section.
@@ -15,18 +16,8 @@
 
 Python version 3.7+ required!
 
-> - download the source code from [here](https://github.com/sera619/PasswordManager/archive/refs/heads/master.zip)
-> - Open a Terminal in the rootdirectory and type in:
->
->```bash
->pip3 install -r requirements.txt
->```
->
->to install all dependencies. After that u can simple run:
->
->```bash
->python main.py
->```
+> - download the source code from [here](https://github.com/sera619/PasswordManager/releases/download/v.0.3.6/P455W1ZZ4RD_v0.3.6_Win64.zip)
+> - extract the ZIP and run the included .exe
 >
 > - Follow the given instructions on the Terminal!
 > - You can Watch this youtube-video for example (click on image):
